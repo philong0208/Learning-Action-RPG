@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = GenericRPG
+build_property.ProjectDir = D:\Godot_v3.5.3-stable_mono_win64\Workspace\GenericRPG\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

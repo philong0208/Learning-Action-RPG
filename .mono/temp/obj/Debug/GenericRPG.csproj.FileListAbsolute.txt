@@ -1,0 +1,9 @@
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\bin\Debug\GenericRPG.dll
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\bin\Debug\GenericRPG.pdb
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.csproj.AssemblyReference.cache
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.GeneratedMSBuildEditorConfig.editorconfig
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.AssemblyInfoInputs.cache
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.AssemblyInfo.cs
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.csproj.CoreCompileInputs.cache
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.dll
+D:\GODOT_V3.5.3-STABLE_MONO_WIN64\WORKSPACE\GENERICRPG\.mono\temp\obj\Debug\GenericRPG.pdb
