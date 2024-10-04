@@ -18,6 +18,7 @@ public class Bat : KinematicBody2D
 	private Stats stats;
 	private SwordHitbox swordHitbox;
 	private PlayerDetectionZone zone;
+	private Hurtbox hurtbox;
 
 	CreateEffectRepository _effect;
 
@@ -34,6 +35,7 @@ public class Bat : KinematicBody2D
 		stats = (Stats)GetNode("Stats");
 		zone = (PlayerDetectionZone)GetNode("PlayerDetectionZone");
 		swordHitbox = (SwordHitbox)GetNode("/root/Game/YSort/Player/HitboxPivot/SwordHitbox");
+		hurtbox = (Hurtbox)GetNode("HurtBox");
 		_effect = new CreateEffectRepository();
 	}
 	public override void _PhysicsProcess(float delta)
@@ -87,8 +89,9 @@ public class Bat : KinematicBody2D
 		var pivot = area.GetParent();
 		var player = (Player)pivot.GetParent();
 
-		stats.Health -= swordHitbox.damage; 
-		knockback = player.rollVector * KNOCKBACK_FORCE; // player.rollVector: Get the direction player is facing and make it knockback direction.
+        knockback = player.rollVector * KNOCKBACK_FORCE; // player.rollVector: Get the direction player is facing and make it knockback direction.
+        stats.Health -= swordHitbox.damage;
+		hurtbox.createHitEffect();
 	}
 
 	private void onStatsNoHealth()

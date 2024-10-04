@@ -3,20 +3,66 @@ using System;
 
 public class Hurtbox : Area2D
 {
-    [Export] bool showHitFX = true;
+
+    [Signal]
+    public delegate void invincibleStarted();
+    [Signal]
+    public delegate void invincibleEnded();
+
+    private bool _invincible = false;
+    private bool invincible { 
+        get { return _invincible; }
+        set 
+        {
+            if (_invincible != value)
+            {
+                _invincible = value;
+                if (_invincible)
+                {
+                    EmitSignal("invincibleStarted");
+                }
+                else
+                {
+                    EmitSignal("invincibleEnded");
+                }
+            }
+        } 
+    }
+
+    Timer timer;
+
     CreateEffectRepository _effect;
 
     public override void _Ready()
     {
+        timer = (Timer)GetNode("InvincibleTimer");
         _effect = new CreateEffectRepository();
     }
 
-    private void onHurtBoxAreaEntered(Area2D area)
+    public void createHitEffect()
     {
-        if (showHitFX)
-        {
-            createHitEffectInterface(_effect);
-        }
+        createHitEffectInterface(_effect);
+    }
+
+    public void startInvincibility(float duration)
+    {
+        this.invincible = true;
+        timer.Start(duration);
+    }
+
+    private void onInvincibleTimerTimeout()
+    {
+        this.invincible = false;
+    }
+
+    private void onHurtBoxInvincibleEnded()
+    {
+        Monitoring = true;
+    }
+
+    private void onHurtBoxInvincibleStarted()
+    {
+        SetDeferred("monitoring", false);
     }
 
     private void createHitEffectInterface(IDeathEffect effect)

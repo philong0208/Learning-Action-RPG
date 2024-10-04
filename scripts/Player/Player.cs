@@ -3,32 +3,38 @@ using System;
 
 public class Player : KinematicBody2D
 {
-	private enum STATE
-	{
-		MOVE,
-		ROLL,
-		ATTACK
-	};
-
 	const float MAX_SPEED = 80;
 	const float ACCELERATION = 500;
 	const float FRICTION = 500;
 	const float ROLL_SPEED = 125;
+	const float INVINCIBLE_TIME = 10;
 
 	public Vector2 velocity = Vector2.Zero;
 	public Vector2 rollVector = Vector2.Down;
-	STATE state = STATE.MOVE;
+	//public Stats stats;
+	public PlayerStats stats;
 
 	private AnimationPlayer animationPlayer = null;
 	private AnimationTree animationTree = null;
 	private AnimationNodeStateMachinePlayback animationState;
+	private Hurtbox hurtbox;
 
+    private enum STATE
+    {
+        MOVE,
+        ROLL,
+        ATTACK
+    };
+    STATE state = STATE.MOVE;
 
-	public override void _Ready()
+    public override void _Ready()
 	{
+		stats = PlayerStats.Instance;
+		stats.Connect("noHealth", this, "queue_free");
 		animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
 		animationTree = (AnimationTree)GetNode("AnimationTree");
 		animationState = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+		hurtbox = (Hurtbox)GetNode("HurtBox");
 		animationTree.Active = true;
 	}
 	public override void _PhysicsProcess(float delta)
@@ -123,5 +129,12 @@ public class Player : KinematicBody2D
 	public void attackAnimationFinish()
 	{
 		state = STATE.MOVE;
+	}
+
+	public void onHurtBoxAreaEntered(Area2D area)
+	{
+		stats.Health -= 1;
+		hurtbox.startInvincibility(INVINCIBLE_TIME / 10);
+		hurtbox.createHitEffect();
 	}
 }
