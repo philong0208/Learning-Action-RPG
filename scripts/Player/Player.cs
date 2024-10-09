@@ -7,7 +7,7 @@ public class Player : KinematicBody2D
 	const float ACCELERATION = 500;
 	const float FRICTION = 500;
 	const float ROLL_SPEED = 125;
-	const float INVINCIBLE_TIME = 10;
+	const float INVINCIBLE_TIME = 5;
 
 	public Vector2 velocity = Vector2.Zero;
 	public Vector2 rollVector = Vector2.Down;
@@ -18,6 +18,7 @@ public class Player : KinematicBody2D
 	private AnimationTree animationTree = null;
 	private AnimationNodeStateMachinePlayback animationState;
 	private Hurtbox hurtbox;
+	private AnimationPlayer blinkAnimationPlayer;
 
     private enum STATE
     {
@@ -35,6 +36,7 @@ public class Player : KinematicBody2D
 		animationTree = (AnimationTree)GetNode("AnimationTree");
 		animationState = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
 		hurtbox = (Hurtbox)GetNode("HurtBox");
+		blinkAnimationPlayer = (AnimationPlayer)GetNode("BlinkAnimationPlayer");
 		animationTree.Active = true;
 	}
 	public override void _PhysicsProcess(float delta)
@@ -120,21 +122,31 @@ public class Player : KinematicBody2D
 		velocity = MoveAndSlide(velocity); // Do not use MoveAndSlide() outside of _PhysicProcess(delta)
 	}
 
-	public void rollAnimationFinish()
+	private void rollAnimationFinish()
 	{
 		velocity = velocity / 2;
 		state = STATE.MOVE;
 	}
 
-	public void attackAnimationFinish()
+	private void attackAnimationFinish()
 	{
 		state = STATE.MOVE;
 	}
 
-	public void onHurtBoxAreaEntered(Area2D area)
+	private void onHurtBoxAreaEntered(Area2D area)
 	{
 		stats.Health -= 1;
 		hurtbox.startInvincibility(INVINCIBLE_TIME / 10);
 		hurtbox.createHitEffect();
+	}
+
+	private void onHurtBoxInvincibleStarted()
+	{
+		blinkAnimationPlayer.Play("Start");
+	}
+
+	private void onHurtBoxInvincibleEnded()
+	{
+		blinkAnimationPlayer.Play("Stop");
 	}
 }

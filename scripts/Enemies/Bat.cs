@@ -19,6 +19,7 @@ public class Bat : KinematicBody2D
 	private SwordHitbox swordHitbox;
 	private PlayerDetectionZone zone;
 	private Hurtbox hurtbox;
+	private AnimationPlayer blinkAnimationPlayer;
 
 	CreateEffectRepository _effect;
 
@@ -37,6 +38,7 @@ public class Bat : KinematicBody2D
 		swordHitbox = (SwordHitbox)GetNode("/root/Game/YSort/Player/HitboxPivot/SwordHitbox");
 		hurtbox = (Hurtbox)GetNode("HurtBox");
 		_effect = new CreateEffectRepository();
+		blinkAnimationPlayer = (AnimationPlayer)GetNode("BlinkAnimationPlayer");
 	}
 	public override void _PhysicsProcess(float delta)
 	{
@@ -92,6 +94,7 @@ public class Bat : KinematicBody2D
         knockback = player.rollVector * KNOCKBACK_FORCE; // player.rollVector: Get the direction player is facing and make it knockback direction.
         stats.Health -= swordHitbox.damage;
 		hurtbox.createHitEffect();
+		hurtbox.startInvincibility((float)0.4);
 	}
 
 	private void onStatsNoHealth()
@@ -100,7 +103,17 @@ public class Bat : KinematicBody2D
         QueueFree();
 	}
 
-	private void createDeathEffectInterface(IDeathEffect effect)
+	private void onHurtBoxInvincibleStarted()
+	{
+		blinkAnimationPlayer.Play("Start");
+	}
+
+	private void onHurtBoxInvincibleEnded()
+	{
+		blinkAnimationPlayer.Play("Stop");
+	}
+
+    private void createDeathEffectInterface(IDeathEffect effect)
 	{
 		// This is how to inject Interfaces and use it
 		effect.CreateEffect("res://scenes/Effects/EnemyDeathEffect.tscn", GetParent(), GlobalPosition);

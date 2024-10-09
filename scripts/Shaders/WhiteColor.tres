@@ -1,0 +1,18 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment()
+{
+	vec4 previousColor = texture(TEXTURE, UV); // This wil scan, if there is sprite, return the color. If this line is removed, the box of the sprite is the color
+	vec4 whiteColor = vec4(1.0, 1.0, 1.0, previousColor.a);
+	vec4 newColor = previousColor; // Default color
+	if(active)
+	{
+		newColor = whiteColor;
+	}
+	COLOR = newColor;
+}"

@@ -3,11 +3,7 @@ using System;
 
 public class Hurtbox : Area2D
 {
-
-    [Signal]
-    public delegate void invincibleStarted();
-    [Signal]
-    public delegate void invincibleEnded();
+    private CollisionShape2D hurtboxCollision;
 
     private bool _invincible = false;
     private bool invincible { 
@@ -36,6 +32,7 @@ public class Hurtbox : Area2D
     public override void _Ready()
     {
         timer = (Timer)GetNode("InvincibleTimer");
+        hurtboxCollision = (CollisionShape2D)GetNode("HurtboxCollisionShape2D");
         _effect = new CreateEffectRepository();
     }
 
@@ -57,12 +54,13 @@ public class Hurtbox : Area2D
 
     private void onHurtBoxInvincibleEnded()
     {
-        Monitoring = true;
+        //Monitoring = true;
+        hurtboxCollision.Disabled = false;
     }
 
     private void onHurtBoxInvincibleStarted()
     {
-        SetDeferred("monitoring", false);
+        hurtboxCollision.SetDeferred("disabled", true);
     }
 
     private void createHitEffectInterface(IDeathEffect effect)
@@ -70,4 +68,9 @@ public class Hurtbox : Area2D
         // This is how to inject Interfaces and use it
         effect.CreateEffect("res://scenes/Effects/HitEffect.tscn", GetTree().CurrentScene, GlobalPosition);
     }
+
+    [Signal]
+    public delegate void invincibleStarted();
+    [Signal]
+    public delegate void invincibleEnded();
 }

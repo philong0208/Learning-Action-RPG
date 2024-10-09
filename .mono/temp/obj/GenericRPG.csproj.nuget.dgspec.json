@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GODOT_V3.5.3-STABLE_MONO_WIN64\\WORKSPACE\\GENERICRPG\\GenericRPG.csproj": {}
+    "D:\\Godot_v3.5.3-stable_mono_win64\\Workspace\\GenericRPG\\GenericRPG.csproj": {}
   },
   "projects": {
-    "D:\\GODOT_V3.5.3-STABLE_MONO_WIN64\\WORKSPACE\\GENERICRPG\\GenericRPG.csproj": {
+    "D:\\Godot_v3.5.3-stable_mono_win64\\Workspace\\GenericRPG\\GenericRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GODOT_V3.5.3-STABLE_MONO_WIN64\\WORKSPACE\\GENERICRPG\\GenericRPG.csproj",
+        "projectUniqueName": "D:\\Godot_v3.5.3-stable_mono_win64\\Workspace\\GenericRPG\\GenericRPG.csproj",
         "projectName": "GenericRPG",
-        "projectPath": "D:\\GODOT_V3.5.3-STABLE_MONO_WIN64\\WORKSPACE\\GENERICRPG\\GenericRPG.csproj",
+        "projectPath": "D:\\Godot_v3.5.3-stable_mono_win64\\Workspace\\GenericRPG\\GenericRPG.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\GODOT_V3.5.3-STABLE_MONO_WIN64\\WORKSPACE\\GENERICRPG\\.mono\\temp\\obj\\",
+        "outputPath": "D:\\Godot_v3.5.3-stable_mono_win64\\Workspace\\GenericRPG\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
